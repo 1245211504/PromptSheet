@@ -1,10 +1,12 @@
 <template>
   <div>
     <HeaderSearch />
+    <Legend num="18" />
   </div>
 </template>
 <script lang="ts" setup>
 import HeaderSearch from "@/components/headerSearch/index.vue";
+import Legend from "./components/legend/index.vue";
 import { onMounted } from "vue";
 import { findAllAPI } from "@/services/api";
 import { useRoute } from "vue-router";

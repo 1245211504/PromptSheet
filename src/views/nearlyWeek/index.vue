@@ -1,13 +1,11 @@
 <script lang="ts" setup>
+import HeaderSearch from "@/components/headerSearch/index.vue";
 </script>
 
 <template>
   <div>
-    近七日
+    <HeaderSearch />
   </div>
 </template>
 
-<style lang="less" scoped>
-
-
-</style>
+<style lang="less" scoped></style>
