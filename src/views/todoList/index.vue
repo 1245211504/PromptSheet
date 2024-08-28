@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderSearch />
-    <Legend num="18" />
+    <Legend :num="18" />
   </div>
 </template>
 <script lang="ts" setup>

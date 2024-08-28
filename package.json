@@ -1,6 +1,7 @@
 {
-  "name": "vue-project",
-  "version": "0.0.1",
+  "name": "jn-prompt-sheet",
+  "group": "trs-jn",
+  "version": "1.0.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +9,8 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "push": "node push.cjs",
+    "push403": "npm run push 403",
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
@@ -32,6 +35,9 @@
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.3.1",
+    "ora": "^1.2.0",
+    "scp2": "^0.5.0",
+    "ssh2": "^1.15.0",
     "vue-tsc": "^2.0.21"
   }
 }
