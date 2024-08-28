@@ -1,11 +1,13 @@
 <template>
   <div class="headerSearch flex">
     <div class="title">舆情提示单</div>
-    <div class="search flex" @click="toSearchHistory">
-      <div v-if="keyword" class="keyword">
+    <div class="search flex">
+      <div v-if="keyword" class="keyword" @click="toSearchHistory">
         {{ keyword }}
       </div>
-      <div v-else class="placeholder">请输入关键词</div>
+      <div v-else class="placeholder" @click="toSearchHistory">
+        请输入关键词
+      </div>
       <van-icon name="search" />
     </div>
   </div>
@@ -63,6 +65,9 @@ onMounted(() => {
     padding: 0 20px;
     justify-content: space-between;
     align-items: center;
+    .placeholder,.keyword{
+      flex: 1;
+    }
 
     .van-icon-search {
       font-size: 30px;

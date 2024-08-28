@@ -43,12 +43,6 @@ const props = defineProps({
     .item {
       align-items: center;
     }
-    .dot {
-      margin: 0 5px;
-      height: 5px;
-      width: 5px;
-      border-radius: 50%;
-    }
   }
 }
 </style>

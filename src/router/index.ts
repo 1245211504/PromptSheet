@@ -24,6 +24,10 @@ const router = createRouter({
             path: '/SearchHistory',
             name: 'SearchHistory',
             component: () => import('@/views/searchHistory/index.vue')
+        }, {
+            path: '/Details/PromptSheet',
+            name: 'promptSheet',
+            component: () => import('@/views/details/promptSheet.vue')
         },
     ]
 })
