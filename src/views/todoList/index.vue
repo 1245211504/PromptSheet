@@ -1,36 +1,54 @@
 <template>
   <div>
-    <HeaderSearch />
-    <Legend :num="18" />
-    <div class="listbox">
-      <ListItem />
-    </div>
+    <HeaderSearch @search="getData" />
+    <Legend :num="count" />
+    <van-list
+      v-model:loading="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="getData"
+    >
+      <ListItem v-for="item in dataList" :itemInfo="item" />
+    </van-list>
   </div>
 </template>
 <script lang="ts" setup>
 import HeaderSearch from "@/components/headerSearch/index.vue";
 import Legend from "./components/legend/index.vue";
 import ListItem from "./components/listItem/index.vue";
-import { onMounted } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { findAllAPI } from "@/services/api";
 import { useRoute } from "vue-router";
 const route = useRoute();
+const count = ref(0);
+const loading = ref(false);
+const finished = ref(false);
+const pageNo = ref(0);
+let dataList = reactive<any[]>([]);
 const getData = async () => {
+  loading.value = true;
+  pageNo.value++;
   const params = {
     timeType: 0,
-    msgStatus: -1,
+    msgStatus: "2,3,5",
     msgType: 1,
     keyWord: route.query.keyword,
-    pageNum: 1,
+    pageNum: pageNo.value,
     pageSize: 20,
-    organId: 241,
+    organId: 47,
     orderType: "desc",
     orderBy: "send_time",
-    startDate: "2024-01-01 00:00:00",
-    endDate: "2024-08-28 23:59:59",
   };
   const response = await findAllAPI(params);
-  console.log(response);
+
+  let data = response.data;
+  count.value = data.count;
+
+  dataList.push(...data.data);
+  loading.value = false;
+  if (dataList.length >= count.value) {
+    finished.value = true;
+  }
 };
 onMounted(() => {
   getData();

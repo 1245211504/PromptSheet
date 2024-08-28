@@ -8,10 +8,12 @@
       </span>
     </div>
     <div class="species flex">
-      <div class="item flex" v-for="item in legend">
-        <div class="dot" :style="{ backgroundColor: item.color }"></div>
-        <div class="name">{{ item.name }}</div>
-      </div>
+      <template v-for="item in legend">
+        <div class="item flex" v-if="item.color">
+          <div class="dot" :style="{ backgroundColor: item.color }"></div>
+          <div class="name">{{ item.name }}</div>
+        </div>
+      </template>
     </div>
   </div>
 </template>

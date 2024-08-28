@@ -2,7 +2,7 @@
   <div class="NearlyWeek">
     <HeaderSearch />
     <div class="listBox">
-      <ListItem />
+      <ListItem v-for="item in dataList" :itemInfo="item" />
     </div>
   </div>
 </template>
@@ -10,10 +10,11 @@
 <script lang="ts" setup>
 import HeaderSearch from "@/components/headerSearch/index.vue";
 import ListItem from "./components/listItem/index.vue";
-import { onMounted } from "vue";
+import { onMounted, reactive } from "vue";
 import { findAllAPI } from "@/services/api";
 import { useRoute } from "vue-router";
 const route = useRoute();
+const dataList = reactive([]);
 const getData = async () => {
   const params = {
     timeType: 0,

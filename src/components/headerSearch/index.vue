@@ -8,7 +8,7 @@
       <div v-else class="placeholder" @click="toSearchHistory">
         请输入关键词
       </div>
-      <van-icon name="search" />
+      <van-icon name="search" @click="search" />
     </div>
   </div>
 </template>
@@ -17,10 +17,15 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-const value = ref("");
 const keyword = ref("");
 const router = useRouter();
 const route = useRoute();
+
+const emit = defineEmits(["search"]);
+
+const search = () => {
+  emit("search");
+};
 
 const toSearchHistory = () => {
   router.push({
@@ -65,7 +70,8 @@ onMounted(() => {
     padding: 0 20px;
     justify-content: space-between;
     align-items: center;
-    .placeholder,.keyword{
+    .placeholder,
+    .keyword {
       flex: 1;
     }
 

@@ -30,7 +30,7 @@
         <div class="item">
           <div class="label">舆情线索</div>
           <div class="value w-284">
-            <InfoContent />
+            <!-- <InfoContent /> -->
           </div>
         </div>
         <div class="item">
@@ -59,6 +59,19 @@
 <script setup lang="ts">
 //生命周期 - 创建完成（访问当前this实例）
 import InfoContent from "@/components/infoContent/index.vue";
+import { onBeforeMount, reactive } from "vue";
+import { useRoute } from "vue-router";
+import { findById } from "@/services/api";
+const info = reactive({});
+const route = useRoute();
+console.log(route.query);
+
+onBeforeMount(async () => {
+  const response = await findById({
+    promptMsgId: route.query.id,
+  });
+  console.log(response);
+});
 
 const onClickLeft = () => {
   history.back();
@@ -134,7 +147,7 @@ const onClickLeft = () => {
       }
     }
   }
-  .remark{
+  .remark {
     padding: 10px;
     font-size: 14px;
   }

@@ -1,7 +1,7 @@
 {
   "name": "jn-prompt-sheet",
   "group": "trs-jn",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^1.7.5",
     "less": "^4.2.0",
+    "moment": "^2.30.1",
     "pinia": "^2.1.7",
     "vant": "^4.9.4",
     "vite-plugin-svg-icons": "^2.0.1",
@@ -30,14 +31,14 @@
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/tsconfig": "^0.5.1",
     "npm-run-all2": "^6.2.0",
+    "ora": "^1.2.0",
     "postcss-px-to-viewport": "^1.1.1",
+    "scp2": "^0.5.0",
+    "ssh2": "^1.15.0",
     "typescript": "~5.4.0",
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.3.1",
-    "ora": "^1.2.0",
-    "scp2": "^0.5.0",
-    "ssh2": "^1.15.0",
     "vue-tsc": "^2.0.21"
   }
 }

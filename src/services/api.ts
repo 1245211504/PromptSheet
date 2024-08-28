@@ -1,14 +1,14 @@
 // src/services/api.ts
 import http from './http.js';
 
-// 示例：获取用户信息
+// 查询提示单列表
 export const findAllAPI = (params: any) => {
-  return http.get('/prompt/findAllAPI', { params });
+  return http.get('/api/prompt/findAllAPI', { params });
 };
 
-// 示例：创建新用户
-export const createUser = (data: any) => {
-  return http.post('/users', data);
+// 根据提示单id查询信息
+export const findById = (params: any) => {
+  return http.get('/api/prompt/findById', { params });
 };
 
 // 示例：更新用户信息

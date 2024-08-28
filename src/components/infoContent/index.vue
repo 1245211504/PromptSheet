@@ -2,24 +2,34 @@
 <template>
   <div class="infoContent">
     <div class="title ellipsis-2" @click="titleClick">
-      莱芜戴花园凤城总部经济港的电梯频频困人，按键缺失莱芜戴花园凤城总部经济港的电梯频频困人，按键缺失
+      {{ info.msgTitle }}
     </div>
     <div class="abstract">
-      莱芜在线论坛用户“红石夏雨荷”称，戴花园凤城总部经济港的垃圾电梯，没人管吗？听工作人员说动不动就把人困里面，现在按键都没了。
+      {{ info.msgAbstract }}
     </div>
     <div class="url ellipsis-2">
-      https://www.toutiao.com/video/7379082308392387083/?channel=&source=search_tab
+      {{ info.msgContentUrl }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["on-click"]);
+import { onMounted } from "vue";
 
-//生命周期 - 创建完成（访问当前this实例）
+interface Info {
+  msgTitle: string;
+  msgAbstract: string;
+  msgContentUrl: string;
+}
+
+const emit = defineEmits(["on-click"]);
+const { info: Info } = defineProps(["info"]);
+
 const titleClick = () => {
   emit("on-click");
 };
+onMounted(() => {
+});
 </script>
 <style lang="less" scoped>
 /* @import url(); 引入css类 */
