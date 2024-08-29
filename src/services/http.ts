@@ -4,7 +4,7 @@ import type { AxiosInstance } from 'axios';
 // 创建 Axios 实例
 const http: AxiosInstance = axios.create({
   baseURL: '/sheetapi', // 替换为你的 API 基础路径
-  timeout: 10000, // 请求超时时间
+  timeout: 1000 * 30, // 请求超时时间
   headers: {
     'Content-Type': 'application/json',
   },
