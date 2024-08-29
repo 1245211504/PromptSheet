@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="todoList">
     <HeaderSearch @search="getData" />
     <Legend :num="count" />
     <van-list
@@ -10,6 +10,7 @@
     >
       <ListItem v-for="item in dataList" :itemInfo="item" />
     </van-list>
+    <van-back-top bottom="10vh" right="5vw"/>
   </div>
 </template>
 <script lang="ts" setup>
@@ -54,4 +55,8 @@ onMounted(() => {
   getData();
 });
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.todoList{
+  height: calc(~'100vh - 50px');
+  overflow-y: auto;
+}</style>

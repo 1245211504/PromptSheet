@@ -1,20 +1,32 @@
 <!--  -->
 <template>
   <div class="listItem">
-    <div class="status">未接收</div>
-    <div class="title ellipsis-2" @click="toDetails">
-      莱芜戴花园凤城总部经济港的电梯频频困人，按键缺失。莱芜戴花园凤城总部经济港的电梯频频困人，按键缺失。
+    <div class="status" :style="{ backgroundColor: getColor() }">
+      {{ getText() }}
     </div>
-    <Remark />
+    <div class="title ellipsis-2" @click="toDetails">
+      <van-highlight
+        :keywords="[route.query.keyword]"
+        :source-string="itemInfo.msgTitle || ''"
+        highlight-class="highlight0"
+      />
+    </div>
+    <Remark
+      :info="{
+        promptNum: itemInfo.promptNum,
+        publishTime: itemInfo.publishTime,
+      }"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 //生命周期 - 创建完成（访问当前this实例）
 import Remark from "@/components/remark/index.vue";
+import legend from "@/assets/json/legend.json";
 
 import { useRoute, useRouter } from "vue-router";
-
+const { itemInfo } = defineProps(["itemInfo"]);
 const router = useRouter();
 const route = useRoute();
 const toDetails = () => {
@@ -22,8 +34,17 @@ const toDetails = () => {
     path: "/Details/PromptSheet",
     query: {
       source: route.path,
+      id: itemInfo.promptMsgId,
     },
   });
+};
+
+const getColor = () => {
+  return legend.find((i) => i.id === itemInfo.promptStatus)?.color;
+};
+
+const getText = () => {
+  return legend.find((i) => i.id === itemInfo.promptStatus)?.name;
 };
 </script>
 <style lang="less" scoped>
@@ -46,7 +67,7 @@ const toDetails = () => {
     font-weight: 600;
   }
   .title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 22px;
     text-indent: 55px;

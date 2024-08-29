@@ -2,10 +2,18 @@
 <template>
   <div class="infoContent">
     <div class="title ellipsis-2" @click="titleClick">
-      {{ info.msgTitle }}
+      <van-highlight
+        :keywords="[route.query.keyword]"
+        :source-string="info.msgTitle || ''"
+        highlight-class="highlight0"
+      />
     </div>
     <div class="abstract">
-      {{ info.msgAbstract }}
+      <van-highlight
+        :keywords="[route.query.keyword]"
+        :source-string="info.msgAbstract || ''"
+        highlight-class="highlight0"
+      />
     </div>
     <div class="url ellipsis-2">
       {{ info.msgContentUrl }}
@@ -15,7 +23,8 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-
+import { useRoute } from "vue-router";
+const route = useRoute();
 interface Info {
   msgTitle: string;
   msgAbstract: string;
@@ -28,18 +37,20 @@ const { info: Info } = defineProps(["info"]);
 const titleClick = () => {
   emit("on-click");
 };
-onMounted(() => {
-});
+onMounted(() => {});
 </script>
 <style lang="less" scoped>
 /* @import url(); 引入css类 */
 .infoContent {
   font-size: 14px;
   text-align: left;
+  & > div {
+    word-break: break-all;
+  }
   .title {
     line-height: 18px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold !important;
   }
   .abstract {
     line-height: 18px;
@@ -48,7 +59,6 @@ onMounted(() => {
   .url {
     text-decoration: underline;
     color: #1873d7;
-    word-break: break-all;
   }
 }
 </style>
