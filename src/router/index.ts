@@ -16,9 +16,6 @@ const router = createRouter({
         {
             path: '/NearlyWeek',
             name: 'NearlyWeek',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
             component: () => import('@/views/nearlyWeek/index.vue')
         }, {
             path: '/SearchHistory',
@@ -28,7 +25,11 @@ const router = createRouter({
             path: '/Details/PromptSheet',
             name: 'promptSheet',
             component: () => import('@/views/details/promptSheet.vue')
-        },
+        }, {
+            path: '/Details/FillFeedback',
+            name: 'FillFeedback',
+            component: () => import('@/views/details/fillFeedback.vue')
+        }
     ]
 })
 

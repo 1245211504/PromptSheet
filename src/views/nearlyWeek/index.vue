@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts" setup>
+import moment from "moment";
 import HeaderSearch from "@/components/headerSearch/index.vue";
 import ListItem from "./components/listItem/index.vue";
 import { onMounted, reactive, ref } from "vue";
@@ -27,13 +28,25 @@ const count = ref(0);
 const loading = ref(false);
 const finished = ref(false);
 let dataList = reactive<any[]>([]);
+
+// 获取今天的日期
+const today = moment();
+
+// 获取最近七天的日期
+const lastSevenDays = Array.from({ length: 7 }, (_, i) =>
+  moment(today).subtract(i, "days").format("YYYY-MM-DD")
+);
+
+// 显示最近七天的日期
+console.log("最近七天的日期：", lastSevenDays);
+
 const getData = async () => {
   loading.value = true;
   pageNo.value++;
   const params = {
     msgStatus: -1,
     keyWord: route.query.keyword,
-    timeType: -1,
+    timeType: 7,
     msgType: 1,
     pageNum: pageNo.value,
     pageSize: 20,

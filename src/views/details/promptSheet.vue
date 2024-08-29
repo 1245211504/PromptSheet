@@ -57,8 +57,10 @@
           <div class="item">
             <div class="label">情况反馈</div>
             <div class="value w-284">
-              <div class="btn">
+              <span v-if="info.promptStatus === 4">
                 {{ info.backContent }}
+              </span>
+              <div class="btn">
                 <van-icon name="records-o" />
                 填写反馈内容
               </div>
@@ -79,7 +81,7 @@
 //生命周期 - 创建完成（访问当前this实例）
 import moment from "moment";
 import InfoContent from "@/components/infoContent/index.vue";
-import { onBeforeMount, reactive, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { useRoute } from "vue-router";
 import { findById } from "@/services/api";
 const info: any = ref({});
@@ -105,7 +107,6 @@ const onClickLeft = () => {
   .box {
     height: calc(~"100vh - 105px");
     overflow-y: auto;
-    // background-color: #63adf8;
   }
   .title {
     font-weight: 600;

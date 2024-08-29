@@ -734,7 +734,7 @@
 
 "@vue/tsconfig@^0.5.1":
   version "0.5.1"
-  resolved "https://registry.npmmirror.com/@vue/tsconfig/-/tsconfig-0.5.1.tgz"
+  resolved "https://registry.npmjs.org/@vue/tsconfig/-/tsconfig-0.5.1.tgz#3124ec16cc0c7e04165b88dc091e6b97782fffa9"
   integrity sha512-VcZK7MvpjuTPx2w6blwnwZAu5/LgBUtejFOi3pPGQFXQN5Ela03FUtd2Qtg4yWGGissVL0dr6Ro1LfOFh+PCuQ==
 
 acorn@^8.11.3, acorn@^8.12.1:
