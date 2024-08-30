@@ -19,6 +19,12 @@ http.interceptors.request.use(
       config.headers['Authorization'] = `Bearer ${token}`;
       config.headers['Token'] = token
     }
+    // 根据 config.data 是否为 FormData 来设置 Content-Type
+    if (config.data instanceof FormData) {
+      config.headers['Content-Type'] = 'multipart/form-data';
+    } else {
+      config.headers['Content-Type'] = 'application/json';
+    }
     return config;
   },
   (error) => {
@@ -57,5 +63,7 @@ http.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
 
 export default http;

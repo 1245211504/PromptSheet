@@ -2,7 +2,9 @@
   <div class="NearlyWeek">
     <HeaderSearch />
     <div class="listBox">
+      <van-empty v-if="!loading && count === 0" description="暂无数据" />
       <van-list
+        v-else
         v-model:loading="loading"
         :finished="finished"
         finished-text="没有更多了"
@@ -57,7 +59,6 @@ const getData = async () => {
   const response = await findAllAPI(params);
   let data = response.data;
   count.value = data.count;
-
   dataList.push(...data.data);
   loading.value = false;
   if (dataList.length >= count.value) {

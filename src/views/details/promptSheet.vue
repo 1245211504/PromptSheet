@@ -1,6 +1,11 @@
 <!-- 提示单详情 -->
 <template>
   <div class="promptSheet">
+    <van-overlay :show="show">
+      <div class="wrapper" @click.stop>
+        <van-loading type="spinner" color="#1989fa" size="50px" />
+      </div>
+    </van-overlay>
     <van-nav-bar
       title="提示单详情"
       left-text="返回"
@@ -56,13 +61,22 @@
         <div class="row">
           <div class="item">
             <div class="label">情况反馈</div>
-            <div class="value w-284">
+            <div class="value feedback">
               <span v-if="info.promptStatus === 4">
                 {{ info.backContent }}
               </span>
-              <div class="btn">
-                <van-icon name="records-o" />
-                填写反馈内容
+              <div v-else>
+                <div>
+                  {{ feedback }}
+                </div>
+                <div class="btn" @click="toFill">
+                  <van-icon name="records-o" />
+                  {{
+                    feedback || info.promptStatus === 5
+                      ? "重新填写反馈内容"
+                      : "填写反馈内容"
+                  }}
+                </div>
               </div>
             </div>
           </div>
@@ -77,24 +91,43 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 //生命周期 - 创建完成（访问当前this实例）
 import moment from "moment";
 import InfoContent from "@/components/infoContent/index.vue";
 import { onBeforeMount, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { findById } from "@/services/api";
-const info: any = ref({});
+const info = ref({});
 const route = useRoute();
-console.log(route.query);
+const router = useRouter();
+const feedback = ref("");
+const show = ref(true);
+
+const toFill = () => {
+  router.push({
+    path: "/Details/FillFeedback",
+  });
+};
 
 onBeforeMount(async () => {
   const response = await findById({
     promptMsgId: route.query.id,
   });
-  console.log(response);
-  // Object.assign(info, response.data);
+  show.value = false
+  let routerFrom = JSON.parse(localStorage.getItem("routerFrom"));
+  if (routerFrom?.fullPath === "/Details/FillFeedback") {
+    //暂存的时候路由跳回来
+    feedback.value = localStorage.getItem("feedback");
+  } else {
+    feedback.value = localStorage.removeItem("feedback");
+  }
   info.value = response.data;
+  if (response.data.promptStatus === 5) {
+    localStorage.setItem("feedback", response.data.backContent);
+    feedback.value = response.data.backContent;
+  }
+  localStorage.setItem("promptSheetDetails", JSON.stringify(response.data));
 });
 
 const onClickLeft = () => {
@@ -104,6 +137,12 @@ const onClickLeft = () => {
 <style lang="less" scoped>
 /* @import url(); 引入css类 */
 .promptSheet {
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
   .box {
     height: calc(~"100vh - 105px");
     overflow-y: auto;
@@ -149,9 +188,14 @@ const onClickLeft = () => {
         width: 75%;
         text-align: center;
         word-break: break-all;
-        /deep/.infoContent {
+        :deep(.infoContent) {
           padding: 10px;
         }
+      }
+      .feedback {
+        padding: 10px;
+        width: calc(~"75% - 20px");
+        height: calc(~"100% - 20px");
       }
       .Clue {
         height: 400px;
@@ -185,18 +229,6 @@ const onClickLeft = () => {
   .remark {
     padding: 10px;
     font-size: 14px;
-  }
-}
-.van-nav-bar {
-  background-color: #63adf8;
-  padding: 5px 0;
-  :deep(.van-icon),
-  :deep(.van-nav-bar__title),
-  :deep(.van-nav-bar__text) {
-    color: #fff;
-  }
-  :deep(.van-icon-search) {
-    font-size: 24px;
   }
 }
 </style>

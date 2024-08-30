@@ -11,12 +11,8 @@ export const findById = (params: any) => {
   return http.get('/api/prompt/findById', { params });
 };
 
-// 示例：更新用户信息
-export const updateUser = (userId: string, data: any) => {
-  return http.put(`/users/${userId}`, data);
+// 提交反馈
+export const updateMsgStatus = (data: any) => {
+  return http.post(`/api/prompt/updateMsgStatus`, data);
 };
 
-// 示例：删除用户
-export const deleteUser = (userId: string) => {
-  return http.delete(`/users/${userId}`);
-};

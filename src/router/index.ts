@@ -6,7 +6,6 @@ const router = createRouter({
         {
             path: '/',
             redirect: '/TodoList'
-
         },
         {
             path: '/TodoList',
@@ -32,5 +31,11 @@ const router = createRouter({
         }
     ]
 })
-
+router.beforeEach((to, from, next) => {
+    if (from.name) {
+        // 将来源路由保存到localStorage信息中
+        localStorage.setItem('routerFrom', JSON.stringify(from))
+    }
+    next();
+});
 export default router

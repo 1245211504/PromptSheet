@@ -2,7 +2,9 @@
   <div class="todoList">
     <HeaderSearch @search="getData" />
     <Legend :num="count" />
+    <van-empty v-if="!loading && count === 0" description="暂无数据" />
     <van-list
+      v-else
       v-model:loading="loading"
       :finished="finished"
       finished-text="没有更多了"
@@ -10,7 +12,7 @@
     >
       <ListItem v-for="item in dataList" :itemInfo="item" />
     </van-list>
-    <van-back-top bottom="10vh" right="5vw"/>
+    <van-back-top bottom="10vh" right="5vw" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -56,7 +58,8 @@ onMounted(() => {
 });
 </script>
 <style lang="less" scoped>
-.todoList{
-  height: calc(~'100vh - 50px');
+.todoList {
+  height: calc(~"100vh - 50px");
   overflow-y: auto;
-}</style>
+}
+</style>
