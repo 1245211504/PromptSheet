@@ -15,7 +15,7 @@
         highlight-class="highlight0"
       />
     </div>
-    <div class="url ellipsis-2">
+    <div class="url ellipsis-2" @click="openURL">
       {{ info.msgContentUrl }}
     </div>
   </div>
@@ -32,8 +32,13 @@ interface Info {
 }
 
 const emit = defineEmits(["on-click"]);
-const { info: Info } = defineProps(["info"]);
-
+// 声明 props 类型
+const props = defineProps(["info"]);
+// 访问 props
+const { info } = props;
+const openURL = () => {
+  window.open(info.msgContentUrl, "_blank");
+};
 const titleClick = () => {
   emit("on-click");
 };
