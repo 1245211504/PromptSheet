@@ -1,4 +1,5 @@
 // utils/formDataUtils.ts
+import { stringify, parse } from 'flatted';
 
 /**
  * 将一个对象转换为 FormData
@@ -28,7 +29,7 @@ export const jsonToFormData = (data: Record<string, any>): FormData => {
         formData.append(key, value);
       } else if (value && typeof value === 'object') {
         // 如果是对象，将其转换为 JSON 字符串
-        formData.append(key, JSON.stringify(value));
+        formData.append(key, stringify(value));
       } else {
         // 处理基本数据类型
         formData.append(key, value);

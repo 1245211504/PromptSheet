@@ -36,6 +36,8 @@
 
 <script setup>
 import { onBeforeMount, ref } from "vue";
+import { stringify, parse } from 'flatted';
+
 import { updateMsgStatus } from "@/services/api";
 import { jsonToFormData } from "@/utils/formDataUtils"; // 导入公共方法
 //生命周期 - 创建完成（访问当前this实例）
@@ -57,7 +59,7 @@ const onSubmit = () => {
     message: "反馈内容提交后无法撤回，确定要提交吗？",
   }).then(async () => {
     submitLoading.value = true;
-    let details = JSON.parse(localStorage.getItem("promptSheetDetails"));
+    let details = parse(localStorage.getItem("promptSheetDetails"));
     let data = {
       msgNum: details.promptNum,
       type: 4,

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { stringify, parse } from 'flatted';
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
     if (from.name) {
         console.log(from);
         // 将来源路由保存到localStorage信息中
-        let json = JSON.stringify(from)
+        let json = stringify(from)
         console.log(json);
         localStorage.setItem('routerFrom', json)
     }

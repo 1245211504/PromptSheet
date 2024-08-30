@@ -94,6 +94,7 @@
 <script setup>
 //生命周期 - 创建完成（访问当前this实例）
 import moment from "moment";
+import { stringify, parse } from 'flatted';
 import InfoContent from "@/components/infoContent/index.vue";
 import { onBeforeMount, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -115,7 +116,7 @@ onBeforeMount(async () => {
     promptMsgId: route.query.id,
   });
   show.value = false
-  let routerFrom = JSON.parse(localStorage.getItem("routerFrom"));
+  let routerFrom = parse(localStorage.getItem("routerFrom"));
   if (routerFrom?.fullPath === "/Details/FillFeedback") {
     //暂存的时候路由跳回来
     feedback.value = localStorage.getItem("feedback");
@@ -127,7 +128,7 @@ onBeforeMount(async () => {
     localStorage.setItem("feedback", response.data.backContent);
     feedback.value = response.data.backContent;
   }
-  localStorage.setItem("promptSheetDetails", JSON.stringify(response.data));
+  localStorage.setItem("promptSheetDetails", stringify(response.data));
 });
 
 const onClickLeft = () => {
