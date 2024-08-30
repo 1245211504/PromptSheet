@@ -33,8 +33,11 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
     if (from.name) {
+        console.log(from);
         // 将来源路由保存到localStorage信息中
-        localStorage.setItem('routerFrom', JSON.stringify(from))
+        let json = JSON.stringify(from)
+        console.log(json);
+        localStorage.setItem('routerFrom', json)
     }
     next();
 });
