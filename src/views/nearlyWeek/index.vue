@@ -7,7 +7,7 @@
         v-else
         v-model:loading="loading"
         :finished="finished"
-        finished-text="没有更多了"
+        :finished-text="`共 ${count} 个提示`"
         @load="getData"
       >
         <ListItem v-for="item in dataList" :itemInfo="item" />

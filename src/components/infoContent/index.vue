@@ -15,7 +15,7 @@
         highlight-class="highlight0"
       />
     </div>
-    <div class="url ellipsis-2" @click="openURL">
+    <div class="url" @click="openURL">
       {{ info.msgContentUrl }}
     </div>
   </div>
