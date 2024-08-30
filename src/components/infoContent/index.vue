@@ -8,7 +8,7 @@
         highlight-class="highlight0"
       />
     </div>
-    <div class="abstract">
+    <div class="abstract" @click="titleClick">
       <van-highlight
         :keywords="[route.query.keyword]"
         :source-string="info.msgAbstract || ''"

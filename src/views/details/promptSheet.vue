@@ -43,6 +43,7 @@
             <div class="label">舆情线索</div>
             <div class="value">
               <InfoContent
+                v-if="info.msgTitle"
                 :info="{
                   msgTitle: info.msgTitle,
                   msgAbstract: info.msgAbstract,
@@ -94,7 +95,7 @@
 <script setup>
 //生命周期 - 创建完成（访问当前this实例）
 import moment from "moment";
-import { stringify, parse } from 'flatted';
+import { stringify, parse } from "flatted";
 import InfoContent from "@/components/infoContent/index.vue";
 import { onBeforeMount, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -115,7 +116,7 @@ onBeforeMount(async () => {
   const response = await findById({
     promptMsgId: route.query.id,
   });
-  show.value = false
+  show.value = false;
   let routerFrom = parse(localStorage.getItem("routerFrom"));
   if (routerFrom?.fullPath === "/Details/FillFeedback") {
     //暂存的时候路由跳回来
