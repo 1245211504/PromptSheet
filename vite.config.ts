@@ -13,6 +13,13 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [VantResolver()],
+      imports: [
+        'vue', // 自动导入 Vue 相关函数
+        'vue-router', // 自动导入 vue-router 相关函数
+        'pinia', // 自动导入 pinia 相关函数
+
+      ],
+      dts: fileURLToPath(new URL('./auto-imports.d.ts', import.meta.url)) // 生成类型声明文件
     }),
     Components({
       resolvers: [VantResolver()],
